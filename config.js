@@ -1,4 +1,10 @@
-document.getElementById('redirectBtn').addEventListener('click', function() {
-    // Замените URL на тот, на который вы хотите перенаправить
-    window.location.href = 'https://www.example.com';  // Сюда вставьте нужный URL
-});
+<script>
+  // Отримуємо форму за класом
+  const form = document.querySelector('.container');
+
+  // Додаємо обробник події submit
+  form.addEventListener('submit', function() {
+    // Перенаправлення на index2.html
+    window.location.href = 'index2.html';
+  });
+</script>

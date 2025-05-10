@@ -1,19 +1,73 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Перенаправление на другой фрейм</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Підбір комплектуючих ПК</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <button class="btn" id="redirectBtn">Перейти на другой фрейм</button>
+  <h1>виберіть компоненти<br>для вашого ПК</h1>
 
-  <!-- Фрейм, в который будет загружаться другой сайт -->
-  <iframe id="frame" src="https://www.example.com" >
-    Ваш браузер не поддерживает фреймы.
-  </iframe>
+  <form class="container">
+    <form class="container" action="javascript:void(0);">
+    <div class="select-wrapper">
+      <select name="processor" required>
+        <option value="" disabled selected>Процесор</option>
+        <option value="intel_i5">Intel Core i5</option>
+        <option value="intel_i7">Intel Core i7</option>
+        <option value="amd_ryzen5">AMD Ryzen 5</option>
+        <option value="amd_ryzen7">AMD Ryzen 7</option>
+      </select>
+    </div>
 
-  <script src="config.js"></script>
+    <div class="select-wrapper">
+      <select name="memory" required>
+        <option value="" disabled selected>Пам'ять (RAM)</option>
+        <option value="8gb_ddr4">8 GB DDR4</option>
+        <option value="16gb_ddr4">16 GB DDR4</option>
+        <option value="32gb_ddr4">32 GB DDR4</option>
+      </select>
+    </div>
+
+    <div class="select-wrapper">
+      <select name="ssd" required>
+        <option value="" disabled selected>SSD диск</option>
+        <option value="ssd_256">256 GB</option>
+        <option value="ssd_512">512 GB</option>
+        <option value="ssd_1tb">1 TB</option>
+      </select>
+    </div>
+
+    <div class="select-wrapper">
+      <select name="videocard" required>
+        <option value="" disabled selected>Відеокарта</option>
+        <option value="gtx_1660">NVIDIA GTX 1660</option>
+        <option value="rtx_3060">NVIDIA RTX 3060</option>
+        <option value="rx_6600">AMD Radeon RX 6600</option>
+      </select>
+    </div>
+
+    <div class="select-wrapper">
+      <select name="psu" required>
+        <option value="" disabled selected>Блок живлення</option>
+        <option value="psu_550w">550 W</option>
+        <option value="psu_650w">650 W</option>
+        <option value="psu_750w">750 W</option>
+      </select>
+    </div>
+
+    <div class="select-wrapper">
+      <select name="motherboard" required>
+        <option value="" disabled selected>Материнська плата</option>
+        <option value="mb_asus_b450">ASUS B450</option>
+        <option value="mb_gigabyte_x570">Gigabyte X570</option>
+        <option value="mb_msi_b550">MSI B550</option>
+      </select>
+    </div>
+
+    <button type="submit">перевірити сумісність</button>
+  </form>
 </body>
 </html>
+

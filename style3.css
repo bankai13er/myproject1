@@ -70,3 +70,29 @@ body {
     opacity: 0.3;
     z-index: 1;
 }
+
+.button-container {
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: -70px;
+    z-index: 2;
+    position: relative;
+}
+
+.return-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #7a00cc; /* темно-фіолетовий */
+    color: white;
+    text-decoration: none;
+    border: 2px solid #4a004a; /* чорнувато-фіолетова обводка */
+    border-radius: 30px;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 0 10px rgba(122, 0, 204, 0.7);
+}
+
+.return-button:hover {
+    background-color: #5a0080;
+    transform: scale(1.05);
+}

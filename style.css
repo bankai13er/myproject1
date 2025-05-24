@@ -1,4 +1,5 @@
-{
+/* Скидаємо відступи */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -63,11 +64,12 @@
   }
   
   button {
-    margin-top: 50px;
+    margin-top: 1px;
+    margin-right: 100px;
     background: #6b21a8;
     color: #fff;
     border: none;
-    padding: 16px 40px;
+    padding: 10px 44px;
     font-size: 1.2em;
     border-radius: 30px;
     cursor: pointer;
@@ -77,4 +79,31 @@
   button:hover {
     background: #7e22ce;
   }
+
+.button-container {
+  text-align: center;
+  margin-left: -300px;
+  margin-bottom: 10px;
+  margin-top: 55px;
+  z-index: 2;
+  position: relative;
+}
+
+.return-button {
+  display: inline-block;
+  padding: 12px 44px;
+  background: linear-gradient(135deg, #4b00ff, #7a00cc); /* градиент сине-фиолетовый */
+  color: white;
+  text-decoration: none;
+  border: 2px solid #3a0070; /* тёмно-фиолетовая обводка */
+  border-radius: 30px;
+  font-size: 1em;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 0 12px rgba(75, 0, 255, 0.6);
+}
+
+.return-button:hover {
+  background: linear-gradient(135deg, #3a00b0, #6000a5); /* темнее при наведении */
+  transform: scale(1.05);
+}
   

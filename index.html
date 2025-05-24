@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="uk">
 <head>
   <meta charset="UTF-8" />
@@ -9,8 +9,7 @@
 <body>
   <h1>виберіть компоненти<br>для вашого ПК</h1>
 
-  <form class="container">
-    <form class="container" action="javascript:void(0);">
+  <form class="container" id="pcForm" action="javascript:void(0);">
     <div class="select-wrapper">
       <select name="processor" required>
         <option value="" disabled selected>Процесор</option>
@@ -67,7 +66,71 @@
     </div>
 
     <button type="submit">перевірити сумісність</button>
+    <a href="index4.html" class="return-button">повернутися на головну</a>
   </form>
+
+  <div id="result" style="margin-top:20px; font-weight: bold; white-space: pre-wrap;"></div>
+
+  <script>
+    document.getElementById('pcForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const form = event.target;
+      const processor = form.processor.value;
+      const memory = form.memory.value;
+      const ssd = form.ssd.value;
+      const videocard = form.videocard.value;
+      const psu = form.psu.value;
+      const motherboard = form.motherboard.value;
+
+      let score = 0;
+      let recommendations = [];
+
+      if ((processor.startsWith('intel') && (motherboard === 'mb_gigabyte_x570' || motherboard === 'mb_msi_b550')) ||
+          (processor.startsWith('amd') && (motherboard === 'mb_asus_b450' || motherboard === 'mb_msi_b550'))) {
+        score += 30;
+      } else {
+        recommendations.push('Материнська плата може не підходити до процесора.');
+      }
+
+      if (memory === '16gb_ddr4' || memory === '32gb_ddr4') {
+        score += 20;
+      } else {
+        recommendations.push('Рекомендуємо мінімум 16GB RAM для кращої продуктивності.');
+      }
+
+      if (ssd === 'ssd_512' || ssd === 'ssd_1tb') {
+        score += 15;
+      } else {
+        recommendations.push('Краще обрати SSD з більшим об’ємом для зручності.');
+      }
+
+      let psuWatt = parseInt(psu.split('_')[1].replace('w', ''));
+      let videoPowerNeed = 0;
+
+      switch(videocard) {
+        case 'gtx_1660': videoPowerNeed = 450; break;
+        case 'rtx_3060': videoPowerNeed = 550; break;
+        case 'rx_6600': videoPowerNeed = 500; break;
+      }
+
+      if (psuWatt >= videoPowerNeed) {
+        score += 25;
+      } else {
+        recommendations.push('Потужність блоку живлення замала для відеокарти.');
+      }
+
+      let resultText = `Оцінка збірки: ${score} / 90\n`;
+
+      if (recommendations.length === 0) {
+        resultText += 'Ваша збірка сумісна та збалансована!';
+      } else {
+        resultText += 'Рекомендації:\n' + recommendations.map((r,i) => (i+1) + '. ' + r).join('\n');
+      }
+
+      document.getElementById('result').innerText = resultText;
+    });
+  </script>
 </body>
 </html>
 

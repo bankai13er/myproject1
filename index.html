@@ -1,15 +1,114 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>  
 <html lang="uk">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Підбір комплектуючих ПК</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* --- додано у CSS (після твого CSS) --- */
+
+    /* Зробимо список компонентів у таблицю */
+    .sidebar ul {
+      display: table;
+      width: 100%;
+    }
+    .sidebar ul li {
+      display: table-row;
+      margin-bottom: 0;
+    }
+    .sidebar ul li > a {
+      display: table-cell;
+      padding: 8px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      cursor: pointer;
+      position: relative;
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+      user-select: none;
+    }
+    .sidebar ul li > a:hover {
+      color: #ffd6ff;
+    }
+
+    /* tooltip праворуч */
+    .tooltip {
+      position: fixed; /* щоб tooltip не рухався зі сторінкою */
+      top: auto; /* в JS вираховуємо позицію */
+      left: 240px;
+      background: #3b0764;
+      padding: 10px 15px;
+      border-radius: 10px;
+      white-space: nowrap;
+      z-index: 10000;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      font-size: 0.9em;
+    }
+    .tooltip.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .tooltip a {
+      color: #ffd6ff;
+      margin-right: 10px;
+      text-decoration: none;
+    }
+    .tooltip a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
+  <div class="sidebar">
+    <h2>Комплектуючі</h2>
+    <ul>
+      <li><a href="#" class="comp-item" data-links='
+        <a href="https://ek.ua/ua/ek-list.php?search_=Intel+i5&katalog_from_search_=188">Intel i5</a>
+        <a href="https://ek.ua/ua/ek-list.php?search_=AMD+Ryzen+7&katalog_from_search_=188">AMD Ryzen 7</a>
+        <a href="https://ek.ua/ua/ek-list.php?search_=Intel+i7&katalog_from_search_=188">Intel i7</a>
+        <a href="https://ek.ua/ua/ek-list.php?search_=AMD+Ryzen+5&katalog_from_search_=188">AMD Ryzen 5</a>
+      '>Процесори</a></li>
+      <li><a href="#" class="comp-item" data-links='
+        <a href="https://ek.ua/ua/ek-list.php?search_=8+gb+DDR4&katalog_from_search_=188">8GB DDR4</a>
+        <a href="https://ek.ua/ua/ek-list.php?search_=16GB+DDR4&katalog_from_search_=188">16GB DDR4</a>
+        <a href="https://ek.ua/ua/ek-list.php?search_=32GB+DDR4&katalog_from_search_=188">32GB DDR4</a>
+        <a href="https://ek.ua/ua/ek-list.php?search_=DDR5&katalog_from_search_=188">DDR5</a>
+      '>Оперативна пам'ять</a></li>
+      <li><a href="#" class="comp-item" data-links='
+        <a href="https://ek.ua/ua/ek-list.php?search_=256GB+SSD&katalog_from_search_=188">256GB SSD</a>
+        <a href="https://ek.ua/ua/ek-list.php?search_=512GB+SSD&katalog_from_search_=188">512GB SSD</a>
+        <a href="https://ek.ua/ua/ek-list.php?search_=1TB+SSD&katalog_from_search_=188">1TB SSD</a>
+        <a href="https://ek.ua/ua/ek-list.php?search_=NVMe+SSD&katalog_from_search_=188">NVMe SSD</a>
+      '>SSD диски</a></li>
+      <li><a href="#" class="comp-item" data-links='
+        <a href="https://ek.ua/ua/ek-list.php?search_=GTX+1660&katalog_from_search_=188">GTX 1660</a>
+        <a href="https://ek.ua/ua/ek-list.php?search_=RTX+3060&katalog_from_search_=188">RTX 3060</a>
+        <a href="https://ek.ua/ua/ek-list.php?search_=RX+6600&katalog_from_search_=188">RX 6600</a>
+        <a href="https://ek.ua/ua/ek-list.php?search_=RTX+4060&katalog_from_search_=188">RTX 4060</a>
+      '>Відеокарти</a></li>
+      <li><a href="#" class="comp-item" data-links='
+        <a href="https://ek.ua/ua/ek-list.php?search_=550W&katalog_from_search_=188">550W</a>
+        <a href="https://ek.ua/ua/ek-list.php?search_=650W&katalog_from_search_=188">650W</a>
+        <a href="https://ek.ua/ua/ek-list.php?search_=750W&katalog_from_search_=188">750W</a>
+        <a href="https://ek.ua/ua/ek-list.php?search_=850W&katalog_from_search_=188">850W</a>
+      '>Блоки живлення</a></li>
+      <li><a href="#" class="comp-item" data-links='
+        <a href="https://ek.ua/ua/ek-list.php?search_=ASUS+B450&katalog_from_search_=188">ASUS B450</a>
+        <a href="https://ek.ua/ua/ek-list.php?search_=MSI+B550&katalog_from_search_=188">MSI B550</a>
+        <a href="https://ek.ua/ua/ek-list.php?search_=Gigabyte+X570&katalog_from_search_=188">Gigabyte X570</a>
+        <a href="https://ek.ua/ua/ek-list.php?search_=ASUS+X670&katalog_from_search_=188">ASUS X670</a>
+      '>Материнські плати</a></li>
+    </ul>
+  </div>
+
   <h1>виберіть компоненти<br>для вашого ПК</h1>
 
   <form class="container" id="pcForm" action="javascript:void(0);">
+    <!-- твій існуючий код форми -->
     <div class="select-wrapper">
       <select name="processor" required>
         <option value="" disabled selected>Процесор</option>
@@ -65,13 +164,17 @@
       </select>
     </div>
 
-    <button type="submit">перевірити сумісність</button>
+    <button type="submit" class="return-button">перевірити сумісність</button>
     <a href="index4.html" class="return-button">повернутися на головну</a>
   </form>
 
   <div id="result" style="margin-top:20px; font-weight: bold; white-space: pre-wrap;"></div>
 
+  <!-- Додано: Плаваюче вікно tooltip -->
+  <div id="floatingTooltip" class="tooltip"></div>
+
   <script>
+    // Твій існуючий скрипт перевірки сумісності
     document.getElementById('pcForm').addEventListener('submit', function(event) {
       event.preventDefault();
 
@@ -130,7 +233,51 @@
 
       document.getElementById('result').innerText = resultText;
     });
+
+    // --- Додано: Логіка показу плаваючого вікна при наведенні ---
+
+    const tooltip = document.getElementById('floatingTooltip');
+    let tooltipTimeout;
+
+    document.querySelectorAll('.comp-item').forEach(item => {
+      item.addEventListener('mouseenter', e => {
+        clearTimeout(tooltipTimeout);
+        // Вставляємо HTML з data-links у tooltip
+        tooltip.innerHTML = item.dataset.links.trim().replace(/\n/g, '');
+        
+        // Позиціонуємо tooltip по вертикалі відносно елемента
+        const rect = item.getBoundingClientRect();
+        // Врахуємо прокрутку, щоб tooltip завжди був поруч з пунктом
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const topPos = rect.top + scrollTop;
+
+        tooltip.style.top = topPos + 'px';
+        tooltip.classList.add('show');
+
+        // Прибираємо tooltip через 5 секунд
+        tooltipTimeout = setTimeout(() => {
+          tooltip.classList.remove('show');
+        }, 5000);
+      });
+
+      item.addEventListener('mouseleave', e => {
+        // При виході з елемента запускаємо таймер на 5 сек, щоб tooltip сховався
+        tooltipTimeout = setTimeout(() => {
+          tooltip.classList.remove('show');
+        }, 5000);
+      });
+    });
+
+    // Якщо курсор вийшов з tooltip — приховуємо його
+    tooltip.addEventListener('mouseenter', () => {
+      clearTimeout(tooltipTimeout);
+      tooltip.classList.add('show');
+    });
+    tooltip.addEventListener('mouseleave', () => {
+      tooltipTimeout = setTimeout(() => {
+        tooltip.classList.remove('show');
+      }, 5000);
+    });
   </script>
 </body>
 </html>
-
